@@ -263,7 +263,6 @@ const initMediaPreview = (options = {}) => {
   const downloadButton = document.getElementById('downloadButton')
   const actionButton = document.getElementById('actionButton')
   const actionButtonText = document.getElementById('actionButtonText')
-  const actionButtonImg = document.getElementById('actionButtonImg')
 
   // Checks for WKWebView's that can't download: https://github.com/eligrey/FileSaver.js/issues/686
   const browser = window.XR8.XrDevice.deviceEstimate().browser.inAppBrowser ||
@@ -284,7 +283,6 @@ const initMediaPreview = (options = {}) => {
   if (navigator.canShare && navigator.canShare(shareTestObj)) {
     webShareAPILevel2 = true
     actionButtonText.textContent = options.actionButtonShareText || 'Share'
-    actionButtonImg.src = '//cdn.8thwall.com/web/img/mediarecorder/share-v1.svg'
     actionButton.addEventListener('click', share)
     if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
       // Hide the download button on iOS and only allow sharing.
@@ -298,7 +296,6 @@ const initMediaPreview = (options = {}) => {
     downloadButton.parentNode.removeChild(downloadButton)
   } else if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
     actionButtonText.textContent = options.actionButtonViewText || 'View'
-    actionButtonImg.src = '//cdn.8thwall.com/web/img/mediarecorder/view-v1.svg'
     actionButton.addEventListener('click', openIosDownload)
     actionButton.classList.add('show-after-download')
   } else {
