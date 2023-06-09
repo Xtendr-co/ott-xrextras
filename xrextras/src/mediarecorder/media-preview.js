@@ -260,6 +260,18 @@ const initMediaPreview = (options = {}) => {
   muteButtonImg = document.getElementById('muteButtonImg')
   finalizeProgressBar = document.getElementById('finalizeProgressBar')
 
+
+  const shopURL = () => {
+    window.open(window.shopUrl, '_blank');
+  }
+
+  const whatsappURL = () => {
+    window.open(window.whatsappUrl, '_blank');
+  }
+
+  document.getElementById('shopButton').addEventListener('click', shopURL)
+  document.getElementById('whatsappButton').addEventListener('click', whatsappURL)
+
   const downloadButton = document.getElementById('downloadButton')
   const actionButton = document.getElementById('actionButton')
   const actionButtonText = document.getElementById('actionButtonText')

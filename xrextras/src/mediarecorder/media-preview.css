@@ -16,6 +16,12 @@
   pointer-events: none;
 }
 
+#closePreviewButton > img{
+  background: white;
+  border-radius: 5em;
+  padding: 0.5em;
+}
+
 #previewContainer.fade-in {
   transition: 0.5s opacity;
   opacity: 1;
@@ -23,7 +29,7 @@
 
 #videoPreview, #imagePreview {
   display: none;
-  max-width: 90vw;
+  max-width: 85vw;
   max-height: calc(88vh - 12vmin);
   border-radius: 10px;
   border: 1vmin solid transparent;
@@ -86,6 +92,7 @@
 #closePreviewButton {
   top: 0;
   right: 0;
+  padding-right: 0;
 }
 
 /* Bottom Bar */
@@ -112,19 +119,6 @@
 }
 
 .style-reset:focus { outline:0; }
-
-#actionButton, #downloadButton, #whatsappButton, #shopButton {
-  padding: 0.3em 0.5em 0.3em 0.5em;
-  user-select: none;
-  -webkit-user-select: none;
-  font-family: 'Nunito', sans-serif;
-  text-align: center;
-  color: white;
-  background-color: black;
-  border-radius: 1em;
-  font-size: 5vmin;
-  min-width: 7em;
-}
 
 .show-with-download-button {
   position: absolute;

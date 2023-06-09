@@ -302,7 +302,6 @@ function create() {
     if (rootNode_) {
       return
     }
-
     // Show the loading UI.
     const e = document.createElement('template')
     e.innerHTML = html.trim()
@@ -310,6 +309,9 @@ function create() {
 
     document.getElementsByTagName('body')[0].appendChild(rootNode)
     setRoot(rootNode)
+    if(document.getElementById('loadImage')) document.getElementById('loadImage').src = window.loadImage
+    if(document.getElementById('mandatoryLoadingScreen')) document.getElementById('mandatoryLoadingScreen').src = window.loadMandatories
+    if(document.getElementById('loader')) document.getElementById('loader').src = window.loader
     waitingToHideLoadingScreen_ = true
 
     if (args && args.waitForRealityTexture) {
