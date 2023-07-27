@@ -12,40 +12,11 @@ function create() {
   // Attach a shader to a material that makes it appear transparent while still receiving shadows.
   const makeShadowMaterial = ({pc, material}) => {
     const materialResource = material.resource || material
-    const shadowFragmentShader = `
-      #ifdef GL2
-      #define SHADOW_SAMPLERVS sampler2DShadow
-      #else
-      #define SHADOW_SAMPLERVS sampler2D
-      #endif
-      vec3 dEmissive;
-      float getShadowPCF3x3(SHADOW_SAMPLERVS shadowMap, vec3 shadowParams);
-      vec3 getTransparentShadow() {
-          float shadow = getShadowPCF3x3(light0_shadowMap, light0_shadowParams);
-          dAlpha = 1. - clamp(shadow + 0.5, 0., 1.);
-          return -gl_FragColor.rgb;
-      }
-      
-      void getEmission() {
-
-      }
+    materialResource.chunks.APIVersion = pc.CHUNKAPI_1_62
+    materialResource.chunks.endPS = `
+      litShaderArgs.opacity = mix(light0_shadowIntensity, 0.0, shadow0);
+      gl_FragColor.rgb = vec3(0.0);
     `
-
-    const endShader = `
-      gl_FragColor.rgb = combineColor();
-      gl_FragColor.rgb += getTransparentShadow();
-      gl_FragColor.rgb = addFog(gl_FragColor.rgb);
-
-      #ifndef HDR
-      gl_FragColor.rgb = toneMap(gl_FragColor.rgb);
-      gl_FragColor.rgb = gammaCorrectOutput(gl_FragColor.rgb);
-      #endif
-    `
-
-    // We use emissive because it can overwrite color to be pure black.
-    materialResource.chunks.APIVersion = pc.CHUNKAPI_1_55
-    materialResource.chunks.emissivePS = shadowFragmentShader
-    materialResource.chunks.endPS = endShader
     materialResource.blendType = pc.BLEND_PREMULTIPLIED
     materialResource.update()
   }
@@ -54,31 +25,19 @@ function create() {
   // warning is printed and one of them is returned arbitrarily. If there are no cameras, an error
   // is printed, and undefined is returned.
   const findOneCamera = (entity) => {
-    // Recursively traverse an entity graph until the root is reached.
-    const findRoot = (entity) => (entity.parent && findRoot(entity.parent)) || entity
+    // Find all camera components in the graph of an entity.
+    const cameras = entity.root.findComponents('camera')
 
-    // Return a node and all entities in its subtree as a flat list, in pre-order traversal order.
-    // Note thiat subtree(findRoot(entity)) will return all nodes in the graph of entity.
-    const subtree = (entity) =>
-      [entity].concat(entity.children.reduce((r, v) => r.concat(subtree(v)), []))
-
-    // Find all camera entities in the graph of an entity.
-    const cameras = (entity) =>
-      subtree(findRoot(entity)).filter(v => v.camera && v.camera instanceof pc.CameraComponent)
-
-    // Get the cameras in the request entity's graph, and print an error or warning if there isn't
-    // exactly one.
-    const cs = cameras(entity)
-    if (!cs.length) {
+    if (!cameras.length) {
       console.error(`Couldn't find any cameras in the scene graph of ${entity.name}`)
       return
     }
-    if (cs.length > 1) {
-      console.warn(`Found too many cameras (${cs.length}) in the scene graph of ${entity.name}`)
+    if (cameras.length > 1) {
+      console.warn(`Found too many cameras (${cameras.length}) in the scene graph of ${entity.name}`)
     }
 
-    // Pick the frist camera if there are multiple.
-    return cs[0]
+    // Pick the first camera if there are multiple.
+    return cameras[0].entity
   }
 
   // Configures the playcanvas entity to to track the image target with the specified name. This
@@ -111,6 +70,6 @@ function create() {
   }
 }
 
-module.exports = {
+export {
   PlayCanvasFactory,
 }
