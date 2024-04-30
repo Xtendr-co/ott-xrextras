@@ -72,6 +72,15 @@ const xrPrimitives = () => {
     },
   }
 
+  const earAttachmentPrimitive = {
+    defaultComponents: {
+      'xrextras-ear-attachment': {},
+    },
+    mappings: {
+      point: 'xrextras-ear-attachment.point',
+    },
+  }
+
   const captureButtonPrimitive = {
     defaultComponents: {
       'xrextras-capture-button': {},
@@ -206,6 +215,7 @@ const xrPrimitives = () => {
     mappings: {
       'material-resource': 'xrextras-hand-mesh.material-resource',
       'wireframe': 'xrextras-hand-mesh.wireframe',
+      'uv-orientation': 'xrextras-hand-mesh.uv-orientation',
     },
   }
 
@@ -228,6 +238,7 @@ const xrPrimitives = () => {
     'xrextras-video-material': videoMaterialPrimitive,
     'xrextras-face-mesh': faceMeshPrimitive,
     'xrextras-face-attachment': faceAttachmentPrimitive,
+    'xrextras-ear-attachment': earAttachmentPrimitive,
     'xrextras-capture-button': captureButtonPrimitive,
     'xrextras-capture-preview': capturePreviewPrimitive,
     'xrextras-capture-config': captureConfigPrimitive,
