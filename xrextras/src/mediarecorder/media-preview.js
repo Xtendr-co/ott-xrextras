@@ -260,21 +260,8 @@ const initMediaPreview = (options = {}) => {
   muteButtonImg = document.getElementById('muteButtonImg')
   finalizeProgressBar = document.getElementById('finalizeProgressBar')
 
-
-  const shopURL = () => {
-    window.open(window.shopUrl, '_blank');
-  }
-
-  const whatsappURL = () => {
-    window.open(window.whatsappUrl, '_blank');
-  }
-
-  document.getElementById('shopButton').addEventListener('click', shopURL)
-  document.getElementById('whatsappButton').addEventListener('click', whatsappURL)
-
   const downloadButton = document.getElementById('downloadButton')
   const actionButton = document.getElementById('actionButton')
-  const actionButtonText = document.getElementById('actionButtonText')
 
   // Checks for WKWebView's that can't download: https://github.com/eligrey/FileSaver.js/issues/686
   const browser = window.XR8.XrDevice.deviceEstimate().browser.inAppBrowser ||
@@ -294,7 +281,6 @@ const initMediaPreview = (options = {}) => {
   // Check if Web Share API Level 2 is supported
   if (navigator.canShare && navigator.canShare(shareTestObj)) {
     webShareAPILevel2 = true
-    actionButtonText.textContent = options.actionButtonShareText || 'Share'
     actionButton.addEventListener('click', share)
     if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
       // Hide the download button on iOS and only allow sharing.
@@ -307,7 +293,6 @@ const initMediaPreview = (options = {}) => {
     actionButton.parentNode.removeChild(actionButton)
     downloadButton.parentNode.removeChild(downloadButton)
   } else if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
-    actionButtonText.textContent = options.actionButtonViewText || 'View'
     actionButton.addEventListener('click', openIosDownload)
     actionButton.classList.add('show-after-download')
   } else {

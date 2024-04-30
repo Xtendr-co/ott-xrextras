@@ -17,9 +17,7 @@
 }
 
 #closePreviewButton > img{
-  background: white;
-  border-radius: 5em;
-  padding: 0.5em;
+  width: 3rem;
 }
 
 #previewContainer.fade-in {
@@ -104,7 +102,7 @@
   gap: 1em;
   position: relative;
   margin: 0 5vmin;
-  margin-bottom: 5vmin;
+  margin-bottom: 1vmin;
 }
 
 .style-reset {
@@ -129,11 +127,6 @@
 
 .show-alone {
   margin-bottom: 2vmin;
-}
-
-#actionButton img {
-  height: 0.8em;
-  margin-left: 0.4em;
 }
 
 .disabled-download.video-preview #openSafariText {

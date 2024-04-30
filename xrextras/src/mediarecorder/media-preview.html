@@ -2,7 +2,7 @@
   <div class="top-bar">
     <div class="preview-box">
       <button id="closePreviewButton" class="style-reset">
-        <img src="https://xtenderwebsite.s3.ap-south-1.amazonaws.com/PlatformDefaults/closeRaw.svg">
+        <img src="https://assets.xtendr.co/ott-preview/close.png">
       </button>
       <img id="imagePreview">
       <video id="videoPreview" playsinline loop></video>
@@ -17,19 +17,24 @@
       <div id="finalizeText"></div>
       <progress id="finalizeProgressBar" value="0" max="100"></progress>
     </div>
-    <button id="downloadButton" class="style-reset icon-button">
-      Download
-    </button>
+    <div class="flexRow width100 centerContent justify-evenly mb1 flexWrap" 
+      style="
+        row-gap: 0.5rem;
+        flex-wrap: wrap;">
+      <div id="downloadButton">
+        <div id="downloadButton-Bg" class="relative centerContent flexRow"></div>
+      </div>
+      <div id="actionButton">
+        <div id="actionButton-Bg" class="relative centerContent flexRow"></div>
+      </div>
+      <div id="shopButton">
+        <div id="shopButton-Bg" class="relative centerContent flexRow"></div>
+      </div>
+      <div id="whatsappButton">
+        <div id="whatsappButton-Bg" class="relative centerContent flexRow"></div>
+      </div>
+    </div>
     <div id="openSafariText" class="style-reset">Downloading is only available in Safari</div>
     <div id="tapAndHoldText" class="style-reset">Tap + Hold to Share</div>
-    <button id="actionButton" class="style-reset">
-      <span id="actionButtonText">Share</span>
-    </button>
-    <button id="shopButton" class="style-reset">
-      Shop
-    </button>
-    <button id="whatsappButton" class="style-reset">
-      Whatsapp
-    </button>
   </div>
 </div>
